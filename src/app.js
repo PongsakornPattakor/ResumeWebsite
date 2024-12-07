@@ -88,7 +88,7 @@ function menuToggle() {
 
 // Modal
 const modalBtn = document.getElementById("modal-btn");
-
+// Show modal
 function showModal() {
   const modalItem1 = document.getElementById("modal-toeic");
   const closeModal = document.getElementById("close-modal");
@@ -113,36 +113,39 @@ function showModal() {
   });
 }
 
-// // ค้นหาปุ่มที่มี data-close-modal
-// const closeModalButtons = document.querySelectorAll("[data-close-modal]");
+// Carousel
+const prevButton = document.querySelector("[data-carousel-prev]");
+const nextButton = document.querySelector("[data-carousel-next]");
+const slides = document.querySelectorAll("[data-carousel-item]"); // 6 index
 
-// // ฟังก์ชันแสดง modal
-// function showModal(modalId) {
-//   const modal = document.getElementById(modalId);
-//   const closeModalBtn = modal.querySelector("[data-close-modal]");  // หาปุ่มปิดโดยใช้ data-close-modal
+let currentIndex = 0;
 
-//   modal.classList.remove("hidden");
-//   setTimeout(() => {
-//     modal.classList.remove("opacity-0");
-//     modal.classList.add("flex", "opacity-100");
-//   }, 10);
+// Update current slide
+function updateCarousel() {
+  slides.forEach((slide, index) => {
+    if (index === currentIndex) {
+      // Shows selected slide
+      slide.classList.remove("opacity-0");
+      slide.classList.add("opacity-100");
+    } else {
+      // Hide unselected slides
+      slide.classList.remove("opacity-100");
+      slide.classList.add("opacity-0");
+    }
+  });
+}
 
-//   // ปิด modal เมื่อคลิกปุ่ม close
-//   closeModalBtn.addEventListener("click", function () {
-//     modal.classList.remove("opacity-100");
-//     modal.classList.add("opacity-0");
+// Start shows default slide
+updateCarousel();
 
-//     setTimeout(() => {
-//       modal.classList.remove("flex");
-//       modal.classList.add("hidden");
-//     }, 600);
-//   });
-// }
+// Previous btn
+prevButton.addEventListener("click", function () {
+  currentIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+  updateCarousel();
+});
 
-// // เพิ่ม event listener ให้กับปุ่มทุกปุ่มที่มี data-modal-target
-// modalButtons.forEach(button => {
-//   button.addEventListener("click", function () {
-//     const modalId = button.getAttribute("data-modal-target");
-//     showModal(modalId);
-//   });
-// });
+// Next btn
+nextButton.addEventListener("click", function () {
+  currentIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+  updateCarousel();
+});

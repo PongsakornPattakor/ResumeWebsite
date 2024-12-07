@@ -4,6 +4,6 @@
 
 @layer components {
   .menu-link {
-    @apply md:px-2 md:py-1 md:transition-all ease-in-out duration-500 delay-100 hover:scale-[1.25] hover:text-black hover:bg-white rounded-md;
+    @apply font-semibold md:px-2 md:py-1 md:transition-all ease-in-out duration-500 text-skyBlue hover:scale-[1.25] hover:text-black hover:bg-white rounded-md hover:flex-shrink;
   }
 }
