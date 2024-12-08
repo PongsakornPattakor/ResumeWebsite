@@ -24,10 +24,10 @@ require('dbconnect.php');
     </style>
 </head>
 
-<body class="h-full min-h-screen w-full grid grid-rows-[auto,1fr,auto] md:grid-rows-[10vh,1fr,auto] bg-gradient-to-tl from-[#220e45] to-[#145885] bg-cover bg-no-repeat justify-self-center">
+<body class="h-full min-h-screen w-full grid grid-rows-[auto,1fr,auto] md:grid-rows-[10vh,1fr,auto] justify-self-center">
 
     <!-- Navbar -->
-    <nav class=" bg-black/80 backdrop-blur-lg py-5 px-4 flex flex-col md:flex-row justify-between text-white sticky top-0 z-50">
+    <nav class=" bg-black backdrop-blur-lg py-5 px-4 flex flex-col md:flex-row justify-between text-white sticky top-0 z-50">
         <!-- Brand -->
         <div class="md:text-4xl text-3xl self-center">
             <a href="index.php">Pongsakorn.F</a>
@@ -61,34 +61,41 @@ require('dbconnect.php');
     </nav>
 
     <!-- Main content -->
-    <main class="container-fluid place-content-center my-5">
-        <div class="justify-self-center bg-white/50 shadow-imageShadow backdrop-blur-md rounded-md flex flex-col w-2/4 h-auto px-5 py-2 shadow-black/60 my-8">
-            <h1 class="text-center text-2xl md:text-5xl pb-3">Log-in</h1>
+    <main class="container-fluid place-content-center bg-[url('https://cdn.pixabay.com/photo/2018/07/12/21/32/subscribe-3534409_960_720.jpg')] bg-cover bg-center bg-no-repeat ">
+        <div class="justify-self-center bg-slate-500/70 shadow-imageShadow backdrop-blur-xl rounded-md flex flex-col w-3/4 md:w-2/4 h-auto px-5 py-2 shadow-black/60 my-8">
+            <div class="flex flex-row self-center gap-2 mt-3">
+                <h1 class="text-center text-2xl md:text-5xl font-semibold text-white">Log-in</h1>
+                <svg class="md:size-12 size-6 self-center text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
+                </svg>
+            </div>
+
             <!-- Login form -->
             <form action="login-db.php" method="POST">
                 <?php include('errors.php') ?>
                 <?php if (isset($_SESSION['error'])) { ?>
-                    <div class="bg-red-500 my-3 p-2 ring ring-black rounded-md text-center text-white flex justify-self-center justify-center w-2/5">
+                    <div class="bg-red-700 my-3 p-2 ring ring-black rounded-md text-center text-white flex flex-col justify-self-center justify-center md:w-4/5 md:text-xl animate-vibrateX">
+                        <h1 class="text-yellow-500 font-bold md:text-3xl bg-black rounded-xl">Alert !</h1>
                         <h1><?php echo $_SESSION['error'] ?></h1>
                     </div>
                     <?php unset($_SESSION['error']); ?>
                 <?php } ?>
                 <!-- Email -->
                 <div class="my-2 md:text-2xl">
-                    <label class="md:mx-5" for="email">E-mail</label>
+                    <label class="md:mx-5" for="email">E-mail :</label>
                     <input type="email" name="email" class="w-full text-center rounded-md">
                 </div>
                 <!-- Passwor -->
                 <div class="my-2 md:text-2xl">
-                    <label class="md:mx-5" for="password1">Password</label>
+                    <label class="md:mx-5" for="password1">Password :</label>
                     <input type="password" name="password" class="w-full text-center rounded-md">
                 </div>
-                <div class="my-4 flex justify-self-center gap-2">
-                    <h1 class="md:text-xl place-self-center">Are you a member?</h1>
-                    <a href="register-form.php" class="md:text-xl p-2 bg-black text-white rounded-md hover:animate-bounce">Nahh ~</a>
+                <div class="my-4 grid grid-cols-2 justify-self-center gap-2">
+                    <h1 class="md:text-xl place-self-center text-center font-semibold text-white">Are you a member?</h1>
+                    <a href="register-form.php" class="md:text-xl text-center p-2 bg-black text-white rounded-md hover:animate-vibrateX">Nahh ~</a>
                 </div>
                 <!-- Button -->
-                <div class="my-2 md:text-xl flex gap-4 justify-self-center text-white">
+                <div class="my-2 md:text-xl flex gap-4 justify-evenly md:justify-self-center text-white">
                     <button type="submit" name="login-submit" class=" bg-[#378af0] rounded-md p-1 border-2 border-black shadow-2xl">Save</button>
                     <button type="reset" class="bg-[#fc2d1e] rounded-md p-1 border-2 border-black shadow-2xl">Clear</button>
                 </div>
@@ -148,6 +155,7 @@ require('dbconnect.php');
         </div>
     </footer>
 
+    <script src="app.js"></script>
 </body>
 
 </html>

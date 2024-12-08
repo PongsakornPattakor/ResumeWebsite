@@ -27,6 +27,19 @@ if (isset($_GET['logout'])) {
     <style>
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                scroll-padding-top: 196px;
+            }
         }
 
         * {
@@ -52,7 +65,7 @@ if (isset($_GET['logout'])) {
                 <li class="menu-link"><a href="index.php">Home</a></li>
                 <li class="menu-link"><a href="#profile">Profile</a></li>
                 <li class="menu-link"><a href="#skills">Skills</a></li>
-                <li class="menu-link"><a href="#experiences">Working experience</a></li>
+                <li class="menu-link"><a href="#experiences">Experience</a></li>
                 <li class="menu-link"><a href="#contacts">Contacts</a></li>
                 <li class="menu-link"><a href="register-form.php">Register</a></li>
                 <li class="menu-link"><a href="index.php?logout='true'">Log-out</a></li>
@@ -68,25 +81,28 @@ if (isset($_GET['logout'])) {
         </div>
         <!-- Mobile menu -->
         <div class="md:hidden hidden justify-center" id="mobile-menu">
-            <ul class="gap-2 text-lg flex">
-                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10] hover:bg-white"><a href="index.php" class="text-white hover:text-black">Home</a></li>
-                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10] hover:bg-white"><a href="register-form.php" class="text-white hover:text-black">Register</a></li>
-                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10] hover:bg-white"><a href="login-form.php" class="text-white hover:text-black">Log-in</a></li>
-                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10] hover:bg-white"><a href="index.php?logout='true'" class="text-white hover:text-black">Log-out</a></li>
+            <ul class="gap-2 text-lg flex flex-wrap">
+                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10]"><a href="index.php" class="text-white ">Home</a></li>
+                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10]"><a href="#profile" class="text-white ">Profile</a></li>
+                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10]"><a href="#skills" class="text-white ">Skills</a></li>
+                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10]"><a href="#experiences" class="text-white ">Experience</a></li>
+                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10]"><a href="#contacts" class="text-white ">Contacts</a></li>
+                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10]"><a href="register-form.php" class="text-white ">Register</a></li>
+                <li class="text-center rounded-md p-1 transition-all duration-200 ease-in-out hover:scale-[1.10]"><a href="index.php?logout='true'" class="text-white ">Log-out</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Main content -->
     <main class="container-fluid bg-black-800 bg-center bg-no-repeat bg-cover">
-        <?php if (isset($_SESSION['username'])) { ?>
-            <!-- Weather -->
+        <?php if (isset($_SESSION['username']) && isset($_SESSION['success'])) { ?>
+            <!-- Welcom msg & Weather -->
             <header class="py-6 px-4 grid md:grid-cols-[35%,65%] bg-[url('https://cdn.pixabay.com/photo/2016/07/09/07/48/blue-sky-1505848_960_720.jpg')] bg-cover bg-no-repeat bg-center">
-                <article class="bg-white/70 backdrop-blur-md rounded-lg shadow-black/60 shadow-imageShadow flex flex-col md:w-full h-fit justify-center flex-wrap pb-3 md:col-span-1 place-self-center">
-                    <h1 class="text-center text-3xl md:text-4xl mb-2 font-bold rounded-t-lg bg-seaBlue text-white w-full p-3">Welcome</h1>
-                    <h1 class="text-center text-2xl md:text-6xl mb-2 font-bold w-full p-3"><?php echo $_SESSION['username'] ?></h1>
+                <article class="bg-white/70 backdrop-blur-md rounded-xl shadow-black/60 shadow-imageShadow flex flex-col md:w-full h-fit justify-center flex-wrap pb-3 md:col-span-1 place-self-center my-2">
+                    <h1 class="text-center text-3xl md:text-4xl mb-2 font-bold rounded-t-lg bg-black text-white w-full p-3">Welcome</h1>
+                    <h1 class="text-center text-2xl md:text-6xl mb-2 font-bold w-full p-3 text-waterBlue underline animate-pulse"><?php echo $_SESSION['username'] ?></h1>
                 </article>
-                <article class="bg-white/70 backdrop-blur-md rounded-lg shadow-black/60 shadow-imageShadow flex flex-col justify-center justify-self-center md:w-[90%] flex-wrap pb-3 md:col-span-1">
+                <article class="bg-white/70 backdrop-blur-md rounded-xl shadow-black/60 shadow-imageShadow flex flex-col justify-center justify-self-center md:w-[90%] flex-wrap pb-3 md:col-span-1">
                     <h1 class="text-center text-3xl md:text-4xl mb-2 font-bold rounded-t-lg bg-deepBlue text-white w-full p-3">Daily Weather</h1>
                     <div class="text-center my-2 p-2">
                         <label for="search" class="md:text-2xl font-bold text-lg">Province</label>
@@ -146,7 +162,7 @@ if (isset($_GET['logout'])) {
                                 <li>Thai : Native</li>
                                 <li>English : Good in reading & listening</li>
                                 <li class="list-none ml-6 font-bold">
-                                    <button class="bg-seaBlue p-1 text-white rounded-md" data-modal-target="modal-toeic" onclick="showModal()">TOEIC score = 625</button>
+                                    <button class="bg-green-700 p-1 text-white rounded-md hover:animate-pulse" data-modal-target="modal-toeic" onclick="showModal()">TOEIC score = 625</button>
                                 </li>
                             </ul>
                         </li>
@@ -182,7 +198,7 @@ if (isset($_GET['logout'])) {
                 <div class="absolute p-8 md:bg-slate-600/60 top-1/4 md:top-0 w-fit h-fit md:h-full md:w-full z-30 justify-center transition-all duration-500 ease-in-out opacity-0 hidden" id="modal-toeic">
                     <div class="flex flex-col content-center justify-center md:w-1/2 bg-black/70 backdrop-blur-lg rounded-xl p-4">
                         <div class="my-2">
-                            <h2 class="font-semibold md:text-2xl w-[50vw] text-white">My TOEIC score :</h2>
+                            <h2 class="font-semibold md:text-2xl w-[50vw] text-white">My TOEIC score report :</h2>
                         </div>
                         <div class="my-2">
                             <img src="./img/toeic.jpg" class="rounded-xl" alt="">
@@ -195,7 +211,6 @@ if (isset($_GET['logout'])) {
             </main>
 
             <!-- Skills -->
-
             <main class="py-6 px-4 grid md:grid-cols-2 bg-waterBlue" id="skills">
                 <!-- Technical -->
                 <article data-faded-left class=" bg-white/70 hover:bg-white transition-all duration-700 backdrop-blur-md md:col-span-1 md:row-span-2 m-2 rounded-xl shadow-imageShadow shadow-black/60 opacity-0 h-fit self-center">

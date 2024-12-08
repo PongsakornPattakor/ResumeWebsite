@@ -34,12 +34,17 @@ module.exports = {
           "75%": { translate: "0 -5px" },
           "100%": { translate: "0 0", opacity: "1" },
         },
+        vibrateX: {
+          "0%,100%": { translate: "10px 0" },
+          "50%": { translate: "-10px 0" },
+        },
       },
       animation: {
         moveFromLeft: "fadedLeft 1s ease-in-out 1",
         moveFromRight: "fadedRight 1s ease-in-out 1",
         moveFromTop: "fadedTop 1s ease-in-out 1",
         moveFromBottom: "fadedBottom 1s ease-in-out 1",
+        vibrateX: "vibrateX 100ms ease-in-out 3",
       },
     },
   },
